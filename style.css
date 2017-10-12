@@ -1,0 +1,23 @@
+body {
+	padding: 1em;
+}
+
+.error {
+	color: red;
+}
+
+#style-image-previews {
+	max-height: 400px;
+	overflow-y: scroll;
+}
+
+.style-image {
+	width: 120px;
+	height: 120px;
+	margin: 3px;
+	border: 2px solid transparent;
+}
+
+.selected {
+	border: 2px solid red;
+}

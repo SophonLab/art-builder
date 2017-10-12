@@ -1,22 +1,24 @@
 {
-  "name": "electron-quick-start",
+  "name": "sophon-art-builder",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "Sophon Art Builder",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "Sophon",
+    "art",
+    "builder"
   ],
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "~1.7.8"
+  },
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "lodash": "^4.17.4"
   }
 }

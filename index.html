@@ -2,14 +2,67 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <title>Sophon Art Builder</title>
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+
+    <!-- CSS Reset -->
+    <link rel="stylesheet" href="https://cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+
+    <!-- Milligram CSS minified -->
+    <link rel="stylesheet" href="https://cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <h1>Hello World!</h1>
-    <!-- All of the Node.js APIs are available in this renderer process. -->
-    We are using Node.js <script>document.write(process.versions.node)</script>,
-    Chromium <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
+    <form>
+      <fieldset>
+        <label for="source-images">Source Images</label>
+        <input id="source-images" type="file" multiple />
+
+        <label>Style Image</label>
+        <div id="style-image-previews"></div>
+
+        <label for="mixing-level">Mixing Level</label>
+        <select id="mixing-level">
+          <option value="low">Low</option>
+          <option value="mid">Medium</option>
+          <option value="high">High</option>
+        </select>
+
+        <label for="instance-url">Private Instance URL</label>
+        <input id="instance-url" type="text" value="http://ec2-35-162-65-98.us-west-2.compute.amazonaws.com:8080" />
+
+        <label for="output-folder">Output Folder</label>
+        <input id="output-folder" type="file" webkitdirectory directory />
+
+        <div class="clearfix">
+          <div class="float-right">
+            <input id="builder-go" class="button" type="submit" value="Build">
+            <input id="builder-cancel" class="button button-clear" type="submit" value="Cancel">
+          </div>
+        </div>
+      </fieldset>
+    </form>
+
+    <ul id="errors"></ul>
+
+    <div id="built" style="display: none">
+      <h2>Art Files</h2>
+      <table id="arts">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Art ID</th>
+            <th>URL</th>
+            <th>Local Path</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
 
     <script>
       // You can also require other files to run in this process
