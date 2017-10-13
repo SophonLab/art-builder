@@ -1,6 +1,6 @@
 {
   "name": "sophon-art-builder",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Sophon Art Builder",
   "productName": "Sophon Art Builder",
   "main": "main.js",
@@ -26,6 +26,7 @@
     "rimraf": "^2.6.2"
   },
   "dependencies": {
+    "electron-context-menu": "^0.9.1",
     "jquery": "^3.2.1",
     "lodash": "^4.17.4"
   }
