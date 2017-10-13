@@ -164,9 +164,9 @@ function processImage(image) {
         console.log(failure);
 
         if (failure.message) {
-          $('#errors').html(failure.message);
+          addError(failure.message);
         } else {
-          $('#errors').html(failure);
+          addError(failure);
         }
       })
   );
