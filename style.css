@@ -18,5 +18,36 @@ body {
 }
 
 .selected {
-	border: 3px solid red;
+	border: 3px solid #9b4dca;
+}
+
+@keyframes anim {
+  to {
+    background-color: #fff;
+  }
+}
+
+@keyframes anim-half {
+  50% {
+    background-color: #fff;
+  }
+}
+
+.art-rendering {
+	animation-name: anim;
+	animation-duration: 1.5s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+	animation-timing-function: linear;
+	background-color: #c29ada;
+	color: #000;
+}
+
+.art-done {
+	background-color: #9b4dca;
+	color: #fff;
+}
+
+.art-status {
+	width: 30px;
 }

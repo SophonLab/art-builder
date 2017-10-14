@@ -1,15 +1,15 @@
 {
   "name": "sophon-art-builder",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Sophon Art Builder",
   "productName": "Sophon Art Builder",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "pack": "npm run pack-mac && npm run pack-win-ia32 && npm run pack-win-x64",
-    "pack-mac": "rimraf builds && electron-packager . --platform darwin --arch x64 --ignore \".*\\.zip\" --out builds && electron-installer-zip builds/*-darwin-x64 mac.zip",
-    "pack-win-ia32": "rimraf builds && electron-packager . --platform win32 --arch ia32 --ignore \".*\\.zip\" --out builds && electron-installer-zip builds/*-win32-ia32 win32.zip",
-    "pack-win-x64": "rimraf builds && electron-packager . --platform win32 --arch x64 --ignore \".*\\.zip\" --out builds && electron-installer-zip builds/*-win32-x64 win64.zip"
+    "pack-mac": "rimraf builds && electron-packager . --platform darwin --arch x64 --ignore \".*\\.(zip|dmg)\" --out builds && electron-installer-dmg builds/*-darwin-x64/*.app mac",
+    "pack-win-ia32": "rimraf builds && electron-packager . --platform win32 --arch ia32 --ignore \".*\\.(zip|dmg)\" --out builds && electron-installer-zip builds/*-win32-ia32 win32.zip",
+    "pack-win-x64": "rimraf builds && electron-packager . --platform win32 --arch x64 --ignore \".*\\.(zip|dmg)\" --out builds && electron-installer-zip builds/*-win32-x64 win64.zip"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
@@ -21,6 +21,7 @@
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "~1.7.8",
+    "electron-installer-dmg": "^0.2.1",
     "electron-installer-zip": "^0.1.2",
     "electron-packager": "^9.1.0",
     "rimraf": "^2.6.2"

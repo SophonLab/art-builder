@@ -52,7 +52,6 @@ $('#source-images').change(function() {
       file: file,
       name: file.name,
       status: 'PENDING',
-      artId: null,
       url: null,
       path: null
     });
@@ -74,30 +73,43 @@ $('#builder-go').click(function(event) {
 
   if (sourceImages.length === 0) {
     hasError = true;
-    addError('Please Choose your Source Images');
-  }
-
-  if (outputFolder === null) {
-    hasError = true;
-    addError('Please Choose your Output Folder');
+    addError('Please choose some source images');
   }
 
   if (styleId === null) {
     hasError = true;
-    addError('Please Select a Style Image');
+    addError('Please select a style image');
   }
 
-  if (!hasError) {
+  let instanceUrl = $('#instance-url').val();
+
+  if (instanceUrl === '') {
+    hasError = true;
+    addError('Please enter your private instance url');
+  }
+
+  if (outputFolder === null) {
+    hasError = true;
+    addError('Please choose an output folder');
+  }
+
+  if (hasError) {
+    scrollToElement('#errors');
+  } else {
     showArtFiles();
 
     // scroll to arts
-    $('html, body').animate({
-      scrollTop: $("#arts").offset().top
-    }, 2000);
+    scrollToElement('#arts');
 
     processImages(sourceImages);
   }
 });
+
+function scrollToElement(selector) {
+  $('html, body').animate({
+    scrollTop: $(selector).offset().top
+  }, 2000);
+}
 
 function clearErrors() {
   $('#errors').empty();
@@ -139,9 +151,6 @@ function processImage(image) {
       then(response => {
         const jobId = response.jobId;
 
-        image.artId = jobId;
-        refreshArtFile(image);
-
         return waitForJob(queryArtJobUrl(jobId));
       }).
       then(response => {
@@ -149,14 +158,18 @@ function processImage(image) {
         image.status = 'DOWNLOADING';
         refreshArtFile(image);
 
+        const mixingLevel = $('#mixing-level').val();
+
         return downloadArt(
           outputUrl(response.outputIds[0]),
-          outputPath(image.name)
+          outputPath(styleId, mixingLevel, image.name)
         );
       }).
       then(() => {
+        const mixingLevel = $('#mixing-level').val();
+
         image.status = 'DONE';
-        image.path = outputPath(image.name);
+        image.path = outputPath(styleId, mixingLevel, image.name);
 
         refreshArtFile(image);
       }).
@@ -205,7 +218,7 @@ function downloadArt(url, path) {
   });
 }
 
-function createArtJob(url, styleId, mixingLevel, imageId) {
+function createArtJob(url, artStyleId, artMixingLevel, imageId) {
   return new Promise(function(resolve, reject) {
     $.ajax({
       type: 'POST',
@@ -213,7 +226,7 @@ function createArtJob(url, styleId, mixingLevel, imageId) {
       data: JSON.stringify({
         imgId: imageId,
         styles: [
-          { id: styleId, mixingLevel: mixingLevel }
+          { id: artStyleId, mixingLevel: artMixingLevel }
         ]
       }),
       dataType: 'json'
@@ -227,25 +240,33 @@ $('#builder-cancel').click(function(event) {
   hideArtFiles();
 });
 
-function refreshArtFile(image) {
-  $('#image-' + image.id).html(`
+function drawArtFileLine(image) {
+  let artClass = 'art-status';
+
+  if (image.status === 'RENDERING') {
+    artClass += ' art-rendering';
+  } else if (image.status === 'DONE') {
+    artClass += ' art-done';
+  }
+
+  return `
+    <td class="${artClass}"></td>
     <td>${image.name}</td>
     <td>${image.status}</td>
-    <td>${image.artId}</td>
-    <td>${image.url}</td>
-    <td>${image.path}</td>
-  `);
+    <td>${image.url || '-'}</td>
+    <td>${image.path || '-'}</td>
+  `;
+}
+
+function refreshArtFile(image) {
+  $('#image-' + image.id).html(drawArtFileLine(image));
 }
 
 function showArtFiles() {
   for (let image of sourceImages) {
       $('#arts tbody').append(`
         <tr id="image-${image.id}">
-          <td>${image.name}</td>
-          <td>${image.status}</td>
-          <td>${image.artId}</td>
-          <td>${image.url}</td>
-          <td>${image.path}</td>
+          ${drawArtFileLine(image)}
         </tr>
       `);
   }
@@ -311,6 +332,9 @@ function outputUrl(id) {
   return instanceUrl + '/api/v1/art/output/' + id;
 }
 
-function outputPath(filename) {
-  return path.join(outputFolder, filename);
+function outputPath(artStyleId, artMixingLevel, filename) {
+  return path.join(
+    outputFolder,
+    artStyleId + '-' + artMixingLevel + '-' + filename
+  );
 }
