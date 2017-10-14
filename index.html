@@ -1,72 +1,154 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Art Builder">
+    <meta name="author" content="Sophon">
+
     <title>Sophon Art Builder</title>
-    <!-- Google Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
 
-    <!-- CSS Reset -->
-    <link rel="stylesheet" href="https://cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Milligram CSS minified -->
-    <link rel="stylesheet" href="https://cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Cabin:700' rel='stylesheet' type='text/css'>
 
-    <link rel="stylesheet" href="style.css">
+    <!-- Custom styles for this template -->
+    <link href="css/grayscale.min.css" rel="stylesheet">
+
   </head>
-  <body>
-    <form>
-      <fieldset>
-        <label for="source-images">Source Images</label>
-        <input id="source-images" type="file" multiple />
 
-        <label>Style Image</label>
-        <div id="style-image-previews"></div>
+  <body id="page-top">
 
-        <label for="mixing-level">Mixing Level</label>
-        <select id="mixing-level">
-          <option value="low">Low</option>
-          <option value="mid">Medium</option>
-          <option value="high">High</option>
-        </select>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">Art Builder</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#win">Windows</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#mac">Mac</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-        <label for="instance-url">Private Instance URL</label>
-        <input id="instance-url" type="text" placeholder="URL of the private amazon server spawned for you. Please contact photopaint.us@gmail.com if you don't have one yet." value="" />
-
-        <label for="output-folder">Output Folder</label>
-        <input id="output-folder" type="file" webkitdirectory directory />
-
-        <div class="clearfix">
-          <div class="float-right">
-            <input id="builder-go" class="button" type="submit" value="Build">
-            <input id="builder-cancel" class="button button-clear" type="submit" value="Cancel">
+    <!-- Intro Header -->
+    <header class="masthead">
+      <div class="intro-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 mx-auto">
+              <h1 class="brand-heading">Art Builder App</h1>
+              <p class="intro-text">Build stunning arts from local images with Sophon Art API.
+              </p>
+              <a href="https://github.com/bencao/art-builder/releases/latest" target="_blank" class="btn btn-default btn-lg">Download</a>
+              <br>
+              <br>
+              <br>
+              <a href="#win" class="btn btn-circle js-scroll-trigger">
+                <i class="fa fa-angle-double-down animated"></i>
+              </a>
+            </div>
           </div>
         </div>
-      </fieldset>
-    </form>
+      </div>
+    </header>
 
-    <ul id="errors"></ul>
+    <!-- Windows Section -->
+    <section id="win" class="content-section text-center" style="padding-top: 50px;">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h2>Use Art Builder App in Windows</h2>
+            <p style="text-align: left;">
+            In the <a href="https://github.com/bencao/art-builder/releases/latest" target="_blank">download</a> page, please download 32 bit or 64 bit windows version according to your CPU arch, if you're not sure, you can by default choose 32 bit.
+            </p>
+            <p style="text-align: left;">
+            After downloading, please extract the file to a folder, find an executable file named <strong>Sophon Art Builder.exe</strong> and double click to execute.
+            </p>
+            <p style="text-align: left;">
+            It will say "unrecognized provider", please use <strong>More Info</strong> => <strong>Run Anyway</strong> to run the app. (We're working on a way to sign the app, so we won't see this in future)
+            </p>
+            <p style="text-align: left;">
+            Then just fill out the form in Art Builder Application, and click on <strong>Build</strong> button to build your art files.
+            </p>
+            <img src="img/art-builder.jpg" width="800" />
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <div id="built" style="display: none">
-      <h2>Art Files</h2>
-      <table id="arts">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Name</th>
-            <th>Status</th>
-            <th>URL</th>
-            <th>Local Path</th>
-          </tr>
-        </thead>
-        <tbody>
-        </tbody>
-      </table>
-    </div>
+    <!-- Mac Section -->
+    <section id="mac" class="content-section text-center" style="padding-top: 50px;">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h2>Use Art Builder App in Mac</h2>
+            <p style="text-align: left;">
+            In the <a href="https://github.com/bencao/art-builder/releases/latest" target="_blank">download</a> page, please download mac dmg file.
+            </p>
+            <p style="text-align: left;">
+            After downloading, double click on the file to execute, you'll see a dialog open. Drag <strong>Sophon Art Builder</strong> to <strong>Applications</strong> folder. Press <strong>F4</strong> and you should be able to find <strong>Sophon Art Builder</strong>.
+            </p>
+            <p style="text-align: left;">
+              It will say "Sophon Art Builder" can't be opened because it is from an unidentified developer. Please click "OK". Then open system "Settings", find "Security &amp; Privacy", you'll see it says "Sophon Art Builder" was blocked from opening because it is from an unidentified developer. Please "Open Anyway". (We're working on a way to sign the app, so we won't see this in future)
+            </p>
+            <p style="text-align: left;">
+            Then just fill out the form in Art Builder Application, and click on <strong>Build</strong> button to build your art files.
+            </p>
+            <img src="img/art-builder.jpg" width="800" />
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <script>
-      // You can also require other files to run in this process
-      require('./renderer.js')
-    </script>
+    <!-- Contact Section -->
+    <section id="contact" class="content-section text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h2>Contact Sophon</h2>
+            <p>Feel free to consult us for any questions by sending mail to
+              <a href="mailto:photopaint.us@gmail.com">photopaint.us@gmail.com</a>
+              </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container text-center">
+        <p>Copyright &copy; Sophon 2017</p>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper/popper.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/grayscale.min.js"></script>
+
   </body>
+
 </html>
